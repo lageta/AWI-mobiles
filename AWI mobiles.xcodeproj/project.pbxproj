@@ -14,6 +14,15 @@
 		6FB4EECD27BFB48900EB15E6 /* AWI_mobilesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4EECC27BFB48900EB15E6 /* AWI_mobilesTests.swift */; };
 		6FB4EED727BFB48900EB15E6 /* AWI_mobilesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4EED627BFB48900EB15E6 /* AWI_mobilesUITests.swift */; };
 		6FB4EED927BFB48900EB15E6 /* AWI_mobilesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4EED827BFB48900EB15E6 /* AWI_mobilesUITestsLaunchTests.swift */; };
+		6FB4EEE727BFBB8C00EB15E6 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 6FB4EEE627BFBB8C00EB15E6 /* FirebaseFirestore */; };
+		6FB4EEE927BFBB8C00EB15E6 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 6FB4EEE827BFBB8C00EB15E6 /* FirebaseFirestoreSwift-Beta */; };
+		6FB4EEEE27BFBDEE00EB15E6 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4EEED27BFBDED00EB15E6 /* Ingredient.swift */; };
+		6FB4EEF027BFBFBD00EB15E6 /* Allergene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4EEEF27BFBFBD00EB15E6 /* Allergene.swift */; };
+		6FB4EEF227BFC06200EB15E6 /* Cout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4EEF127BFC06200EB15E6 /* Cout.swift */; };
+		6FB4EEF427BFC20D00EB15E6 /* FicheTechnique.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4EEF327BFC20D00EB15E6 /* FicheTechnique.swift */; };
+		6FB4EEF627BFC58C00EB15E6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6FB4EEF527BFC58C00EB15E6 /* GoogleService-Info.plist */; };
+		6FB4EEF827BFC78700EB15E6 /* IngredientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4EEF727BFC78700EB15E6 /* IngredientView.swift */; };
+		6FB4EEFA27BFCB5B00EB15E6 /* IngredientViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4EEF927BFCB5B00EB15E6 /* IngredientViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +53,13 @@
 		6FB4EED227BFB48900EB15E6 /* AWI mobilesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AWI mobilesUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FB4EED627BFB48900EB15E6 /* AWI_mobilesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWI_mobilesUITests.swift; sourceTree = "<group>"; };
 		6FB4EED827BFB48900EB15E6 /* AWI_mobilesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWI_mobilesUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		6FB4EEED27BFBDED00EB15E6 /* Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
+		6FB4EEEF27BFBFBD00EB15E6 /* Allergene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Allergene.swift; sourceTree = "<group>"; };
+		6FB4EEF127BFC06200EB15E6 /* Cout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cout.swift; sourceTree = "<group>"; };
+		6FB4EEF327BFC20D00EB15E6 /* FicheTechnique.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FicheTechnique.swift; sourceTree = "<group>"; };
+		6FB4EEF527BFC58C00EB15E6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6FB4EEF727BFC78700EB15E6 /* IngredientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientView.swift; sourceTree = "<group>"; };
+		6FB4EEF927BFCB5B00EB15E6 /* IngredientViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +67,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FB4EEE727BFBB8C00EB15E6 /* FirebaseFirestore in Frameworks */,
+				6FB4EEE927BFBB8C00EB15E6 /* FirebaseFirestoreSwift-Beta in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,8 +112,11 @@
 		6FB4EEBA27BFB48800EB15E6 /* AWI mobiles */ = {
 			isa = PBXGroup;
 			children = (
+				6FB4EEF527BFC58C00EB15E6 /* GoogleService-Info.plist */,
+				6FB4EEEC27BFBC6900EB15E6 /* Model */,
+				6FB4EEEB27BFBC5A00EB15E6 /* ViewModel */,
+				6FB4EEEA27BFBC5000EB15E6 /* View */,
 				6FB4EEBB27BFB48800EB15E6 /* AWI_mobilesApp.swift */,
-				6FB4EEBD27BFB48800EB15E6 /* ContentView.swift */,
 				6FB4EEBF27BFB48900EB15E6 /* Assets.xcassets */,
 				6FB4EEC127BFB48900EB15E6 /* Preview Content */,
 			);
@@ -127,6 +148,34 @@
 			path = "AWI mobilesUITests";
 			sourceTree = "<group>";
 		};
+		6FB4EEEA27BFBC5000EB15E6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6FB4EEBD27BFB48800EB15E6 /* ContentView.swift */,
+				6FB4EEF727BFC78700EB15E6 /* IngredientView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6FB4EEEB27BFBC5A00EB15E6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				6FB4EEF927BFCB5B00EB15E6 /* IngredientViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		6FB4EEEC27BFBC6900EB15E6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6FB4EEED27BFBDED00EB15E6 /* Ingredient.swift */,
+				6FB4EEEF27BFBFBD00EB15E6 /* Allergene.swift */,
+				6FB4EEF127BFC06200EB15E6 /* Cout.swift */,
+				6FB4EEF327BFC20D00EB15E6 /* FicheTechnique.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,6 +192,10 @@
 			dependencies = (
 			);
 			name = "AWI mobiles";
+			packageProductDependencies = (
+				6FB4EEE627BFBB8C00EB15E6 /* FirebaseFirestore */,
+				6FB4EEE827BFBB8C00EB15E6 /* FirebaseFirestoreSwift-Beta */,
+			);
 			productName = "AWI mobiles";
 			productReference = 6FB4EEB827BFB48800EB15E6 /* AWI mobiles.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +268,9 @@
 				Base,
 			);
 			mainGroup = 6FB4EEAF27BFB48800EB15E6;
+			packageReferences = (
+				6FB4EEE527BFBB8C00EB15E6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 6FB4EEB927BFB48800EB15E6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -233,6 +289,7 @@
 			files = (
 				6FB4EEC327BFB48900EB15E6 /* Preview Assets.xcassets in Resources */,
 				6FB4EEC027BFB48900EB15E6 /* Assets.xcassets in Resources */,
+				6FB4EEF627BFC58C00EB15E6 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,7 +315,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FB4EEBE27BFB48800EB15E6 /* ContentView.swift in Sources */,
+				6FB4EEFA27BFCB5B00EB15E6 /* IngredientViewModel.swift in Sources */,
+				6FB4EEF027BFBFBD00EB15E6 /* Allergene.swift in Sources */,
+				6FB4EEF227BFC06200EB15E6 /* Cout.swift in Sources */,
 				6FB4EEBC27BFB48800EB15E6 /* AWI_mobilesApp.swift in Sources */,
+				6FB4EEF827BFC78700EB15E6 /* IngredientView.swift in Sources */,
+				6FB4EEF427BFC20D00EB15E6 /* FicheTechnique.swift in Sources */,
+				6FB4EEEE27BFBDEE00EB15E6 /* Ingredient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -599,6 +662,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6FB4EEE527BFBB8C00EB15E6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6FB4EEE627BFBB8C00EB15E6 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FB4EEE527BFBB8C00EB15E6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		6FB4EEE827BFBB8C00EB15E6 /* FirebaseFirestoreSwift-Beta */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FB4EEE527BFBB8C00EB15E6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseFirestoreSwift-Beta";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6FB4EEB027BFB48800EB15E6 /* Project object */;
 }
