@@ -7,18 +7,48 @@
 
 import Foundation
 import FirebaseFirestore
+import SwiftUI
+import Firebase
+import Combine
 
-class IngredientViewModel{
-    private let firestore = Firestore.firestore()
+class IngredientViewModel : ObservableObject {
+    let ingredeientDB = IngredientDB()
+    var ingredients : [Ingredient]
     
-    init(){
-        
+    init(ingredients : [Ingredient]){
+        self.ingredients = ingredients
     }
+   
+    public func getIngredients() async {
+        /*.ingredeientDB.createIngredient(ingredient: Ingredient(code: 99, libelle: "hdd", categorie: "dd", prix_unitaire: 0.5, unite: "d", stock: 45, allergenes: [], id: "pas destring"))*/
+        self.ingredeientDB.createIngredient(ingredient: Ingredient(code: 107, libelle: "Teessst", categorie: "jjj", prix_unitaire: 0.95, unite: "Nmœ", stock: 367, allergenes: ["gluten","crevettes"], id: "pasdid"))
+        self.ingredients = await ingredeientDB.getIngredients()
+        self.objectWillChange.send()
     
-     func getIngredients()async->[Ingredient]{
-        let data = try? await firestore.collection("Ingredients").getDocuments()
-         let ingredients : [Ingredient] = data?.documents.map{(doc) -> Ingredient in return Ingredient(code: doc.CODE, libelle: doc.LIBELLE, categorie: doc.CATEGORIE, prix_unitaire: doc.PRIX_UNITAIRE, unite: doc.UNITE, stock: doc.STOCK, allergenes: doc.ALLERGENES, id: doc.documentID)
-         }
+    }
+    //https://peterfriese.dev/posts/swiftui-firebase-fetch-data/#fetching-data-and-subscribing-to-updates
+    //Comment in sépare les choses pour qu'on puisse utiliser les servies d'ingrediensts ailleurs ? héritage = le mieux non ?
+    /*
+    func fetchData() {
+        firestore.collection("Ingredient").addSnapshotListener { (querySnapshot, error) in
+        guard let documents = querySnapshot?.documents else {
+          print("No documents")
+          return
+        }
 
+        self.ingredients = documents.map { queryDocumentSnapshot -> Ingredient in
+            let data = queryDocumentSnapshot.data()
+            return Ingredient(
+                code: data["CODE"] as? Int ?? 0,
+                libelle: data["LIBELLE"] as? String ?? "",
+                categorie: data["CATEGORIE"] as? String ?? "",
+                prix_unitaire: data["PRIX_UNITAIRE"] as? Float ?? 0,
+                unite: data["UNITE"] as? String ?? "",
+                stock: data["STOCK"] as? Int ?? 0,
+                allergenes: data["ALLERGENES"] as? [String] ?? [],
+                id: doc.documentID)
+        }
+      }
     }
+    */
 }

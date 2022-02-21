@@ -12,11 +12,13 @@ import Firebase
 struct AWI_mobilesApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            IngredientsView()
         }
     }
     
     init(){
         FirebaseApp.configure()
     }
+    
 }
+
