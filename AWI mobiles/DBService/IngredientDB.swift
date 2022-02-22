@@ -11,6 +11,8 @@ import FirebaseFirestoreSwift
 
 struct IngredientDB {
     let firestore = Firestore.firestore()
+
+        
  
     func getIngredients()async -> [Ingredient] {
         

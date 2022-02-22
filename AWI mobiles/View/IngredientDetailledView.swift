@@ -11,12 +11,22 @@ struct IngredientDetailledView: View {
     
     @State var ingredient : Ingredient
     
-    init(ingredient : Ingredient){
+    var intent : IngredientIntent = IngredientIntent()
+    var viewModel : IngredientDetailViewModel
+    var listViewModel : IngredientsViewModel
+    
+    init(ingredient : Ingredient, listViewModel : IngredientsViewModel){
         self.ingredient = ingredient
+        self.viewModel = IngredientDetailViewModel(model: ingredient)
+        self.listViewModel = listViewModel
+        intent.addObserver(viewModel : self.viewModel, listViewModel : self.listViewModel)
     }
     var body: some View {
         VStack {
-            Text(self.ingredient.LIBELLE)
+            TextField("Libelle :",text:$ingredient.LIBELLE).onSubmit {
+                intent.intentToChange(libelle: ingredient.LIBELLE)
+                intent.intentToUpdateList()
+            }
             Text(String(self.ingredient.CODE))
             Text(self.ingredient.UNITE)
             Text(String(self.ingredient.STOCK))

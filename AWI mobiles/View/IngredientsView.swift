@@ -15,57 +15,86 @@ struct IngredientsView: View {
     /* var ingredientList : [Ingredient] = [Ingredient(code: 0, libelle: "Test1", categorie: "Cat1", prix_unitaire: 10, unite: "P", stock: 1, allergenes: ["gluten"], id: "fjiejf")]
     
    */
-    @StateObject var ingredientVM : IngredientViewModel = IngredientViewModel(ingredients: [])
+    @StateObject var ingredientVM : IngredientsViewModel = IngredientsViewModel(ingredients:[])
     @State var searchCollection : [Ingredient] = []
     
     var body: some View {
-        NavigationView {
         VStack {
-            List {
-                ForEach(searchCollection, id: \.id){
-                    ingredient in
-                    NavigationLink(destination:IngredientDetailledView(ingredient: ingredient)){
-                        VStack {
-                            Text(ingredient.LIBELLE)
-                        }
-                    }
+            HStack(alignment: .bottom){
+                Spacer()
+                Text("Ingredients").font(.system(size : 40, weight: .black))
+                Spacer()
+                Spacer()
+                
+                Button (action : {
                     
-                   
-                    
-                  
+                }){
+                    Image(systemName: "plus.circle.fill").font(.largeTitle).foregroundColor(.blue)
                 }
-              .onDelete {
-                    indexState in
-                    indexState.sorted(by: >).forEach { (i) in
-                        self.ingredientVM.ingredeientDB.deleteIngredient(ingredient: self.searchCollection[i])
+                Spacer()
+            } .padding(5.0)
+        
+        NavigationView {
+            VStack {
+
+                List {
+                    ForEach(searchCollection, id: \.id){
+                        ingredient in
+                        NavigationLink(destination:IngredientDetailledView(ingredient: ingredient, listViewModel: ingredientVM)){
+                            VStack {
+                                if ingredient.ALLERGENES.isEmpty {
+                                    Text(ingredient.LIBELLE)
+                                }
+                                else {
+                                    Text(ingredient.LIBELLE).bold()
+                                }
+                               
+                            }
+                        }
+                        
+                       
+                        
+                      
                     }
-                  
+                  .onDelete {
+                        indexSet in
+                        indexSet.sorted(by: >).forEach { (i) in
+                            self.ingredientVM.ingredientDB.deleteIngredient(ingredient: self.searchCollection[i])
+                          
+                            
+                        }
+                      
+                    }
+                    
+                }
+            
+                .searchable(text: $searchText){
+                    ForEach(searchCollection , id : \.id){ result in Text(result.LIBELLE).searchCompletion(result.LIBELLE)
+                    }
                 }
                 
+                EditButton()
             }
-            .navigationTitle("Liste des ingrédients")
-            .searchable(text: $searchText){
-                ForEach(searchCollection , id : \.id){ result in Text(result.LIBELLE).searchCompletion(result.LIBELLE)
-                }
-            }
+        }
+        .padding(.top, 0.0)
             
-            EditButton()
-        }
-        }
         .onChange(of: searchText){
             index in
             filterIngredients()
+    
+        }
+        .onChange(of : ingredientVM.ingredients){
+            ing in
+            searchCollection = ingredientVM.ingredients
+            filterIngredients()
+            
+           
         }
         .onAppear{
-            
-            Task {
-                 await self.ingredientVM.getIngredients()
-                 self.searchCollection = self.ingredientVM.ingredients
-               
-            }
+            self.ingredientVM.fetchData()
         }
     }
-    
+    }
     func filterIngredients(){
             if !searchText.isEmpty {
                 self.searchCollection = ingredientVM.ingredients.filter { $0.LIBELLE.contains(searchText) ||

@@ -7,7 +7,23 @@
 
 import Foundation
 
-class Ingredient : ObservableObject {
+protocol IngredientObserver {
+    func changed (code : Int)
+    func changed (libelle :String)
+    func changed (categorie : String)
+    func changed (prix_unitaire : Float)
+    func changed (unite : String)
+    func changed (stock : Int)
+    func changed (allergenes : [String])
+}
+
+class Ingredient : ObservableObject, Equatable {
+    
+    var observer : IngredientObserver?
+    static func == (lhs: Ingredient, rhs: Ingredient) -> Bool {
+        return lhs.id == rhs.id && lhs.CODE == rhs.CODE
+    }
+    
     public var id : String;
     public var CODE : Int;
     public var LIBELLE : String;
