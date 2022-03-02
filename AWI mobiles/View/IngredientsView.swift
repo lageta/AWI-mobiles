@@ -7,113 +7,190 @@
 
 import SwiftUI
 
+
+
+
 struct IngredientsView: View {
     
     @State private var searchText : String = ""
-    
-    
+    @State private var isShowingdDetail : Bool = false
+    var filter = ["Libelle", "Categorie", "Prix", "Stock", "Allergene"]
+    @State private var selectedFilter = "Libelle"
     /* var ingredientList : [Ingredient] = [Ingredient(code: 0, libelle: "Test1", categorie: "Cat1", prix_unitaire: 10, unite: "P", stock: 1, allergenes: ["gluten"], id: "fjiejf")]
-    
-   */
+     
+     */
     @StateObject var ingredientVM : IngredientsViewModel = IngredientsViewModel(ingredients:[])
-    @State var searchCollection : [Ingredient] = []
     
     var body: some View {
-        VStack {
-            HStack(alignment: .bottom){
-                Spacer()
-                Text("Ingredients").font(.system(size : 40, weight: .black))
-                Spacer()
-                Spacer()
-                
-                Button (action : {
-                    
-                }){
-                    Image(systemName: "plus.circle.fill").font(.largeTitle).foregroundColor(.blue)
-                }
-                Spacer()
-            } .padding(5.0)
         
         NavigationView {
+            
+            
             VStack {
-
-                List {
-                    ForEach(searchCollection, id: \.id){
-                        ingredient in
-                        NavigationLink(destination:IngredientDetailledView(ingredient: ingredient, listViewModel: ingredientVM)){
-                            VStack {
-                                if ingredient.ALLERGENES.isEmpty {
-                                    Text(ingredient.LIBELLE)
-                                }
-                                else {
-                                    Text(ingredient.LIBELLE).bold()
-                                }
-                               
-                            }
-                        }
-                        
-                       
-                        
-                      
+                
+                Spacer()
+                Picker("", selection: $selectedFilter) {
+                    ForEach(filter, id: \.self) {
+                        Text($0)
                     }
-                  .onDelete {
-                        indexSet in
-                        indexSet.sorted(by: >).forEach { (i) in
-                            self.ingredientVM.ingredientDB.deleteIngredient(ingredient: self.searchCollection[i])
-                          
+                }
+                Spacer()
+                
+                
+                List {
+                    
+                    ForEach(ingredientVM.filteredIngredients, id: \.id){
+                        ingredient in
+                        NavigationLink(destination:IngredientDetailledView(ingredient: ingredient, listViewModel: ingredientVM,addMode: false)){
+                            
+                            Text(ingredient.LIBELLE)
+                            /*
+                             
+                             switch selectedFilter{
+                             case "Libelle":
+                             VStack {
+                             HStack {
+                             if ingredient.ALLERGENES.isEmpty {
+                             Text(ingredient.LIBELLE)
+                             }
+                             else {
+                             Text(ingredient.LIBELLE).bold()
+                             }
+                             Spacer()
+                             }
+                             HStack {
+                             Text("n°\(String(ingredient.CODE))").foregroundColor(.mint)
+                             .font(.system(size : 12))
+                             Text("|")
+                             Text(ingredient.CATEGORIE).foregroundColor(.mint)
+                             .font(.system(size : 12))
+                             Text("|")
+                             Text("stock :\(String(ingredient.STOCK))").foregroundColor(.mint)
+                             .font(.system(size : 12))
+                             Text("|")
+                             
+                             Text("\(String(ingredient.PRIX_UNITAIRE))€").foregroundColor(.mint)
+                             .font(.system(size : 12))
+                             Spacer()
+                             }
+                             
+                             }
+                             
+                             case"Categorie":
+                             
+                             Text(ingredient.CATEGORIE)
+                             
+                             case "Prix":
+                             
+                             Text(String(ingredient.PRIX_UNITAIRE))
+                             
+                             
+                             case "Stock":
+                             
+                             Text(String(ingredient.STOCK))
+                             
+                             
+                             case "Allergene":
+                             
+                             ForEach (ingredient.ALLERGENES, id : \.self) {
+                             allergene in
+                             Text(allergene).bold()
+                             
+                             }
+                             default:
+                             
+                             Text(ingredient.LIBELLE)
+                             
+                             
+                             
+                             }*/
                             
                         }
-                      
+                        
+                    }
+                    .onDelete {
+                        indexSet in
+                        indexSet.sorted(by: >).forEach { (i) in
+                            self.ingredientVM.ingredientDB.deleteIngredient(ingredient: self.ingredientVM.filteredIngredients[i])
+                            
+                        }
+                        
                     }
                     
+                    
+                    
+                
                 }
-            
-                .searchable(text: $searchText){
-                    ForEach(searchCollection , id : \.id){ result in Text(result.LIBELLE).searchCompletion(result.LIBELLE)
+                
+                
+                .refreshable{
+                    ingredientVM.fetchData()
+                }
+                
+                .navigationTitle("Ingredients")
+                
+                
+                .searchable(text: $searchText, placement : .navigationBarDrawer(displayMode: .always)){
+                    ForEach(ingredientVM.filteredIngredients , id : \.id){ result in Text(result.LIBELLE).searchCompletion(result.LIBELLE)
                     }
+                    
                 }
                 
                 EditButton()
+                NavigationLink(destination:IngredientDetailledView(ingredient: Ingredient(), listViewModel: ingredientVM , addMode: true), isActive: $isShowingdDetail) { EmptyView()}
+                
+                
+                Button (action : {
+                    self.isShowingdDetail = true;
+                }){
+                    Image(systemName: "plus.circle.fill").font(.largeTitle).foregroundColor(.blue)
+                }
+                
+                
             }
         }
-        .padding(.top, 0.0)
-            
+        
+        
         .onChange(of: searchText){
             index in
-            filterIngredients()
-    
+            ingredientVM.filterIngredients(searchText : searchText,selectedFilter : selectedFilter)
         }
-        .onChange(of : ingredientVM.ingredients){
-            ing in
-            searchCollection = ingredientVM.ingredients
-            filterIngredients()
+        .onChange(of: selectedFilter){
+            index in
+            ingredientVM.filterIngredients(searchText : searchText,selectedFilter : selectedFilter)
             
-           
-        }
+            
+        }/*
+          .onChange(of : ingredientVM.ingredients){
+          ing in
+          ingredientVM.filteredIngredients = ingredientVM.ingredients
+          filterIngredients()
+          }*/
+        /*  .onChange(of: ingredientVM.needToUpdate){
+         updt in
+         if (ingredientVM.needToUpdate){
+         searchCollection = ingredientVM.ingredients
+         filterIngredients()
+         self.ingredientVM.needToUpdate = false
+         }
+         }*/
+        
+        
         .onAppear{
             self.ingredientVM.fetchData()
+            ingredientVM.filterIngredients(searchText: searchText, selectedFilter: selectedFilter)
         }
-    }
-    }
-    func filterIngredients(){
-            if !searchText.isEmpty {
-                self.searchCollection = ingredientVM.ingredients.filter { $0.LIBELLE.contains(searchText) ||
-                    $0.CODE==(Int(searchText)) ||
-                    $0.PRIX_UNITAIRE==(Float(searchText)) ||
-                    $0.STOCK==(Int(searchText)) ||
-                    $0.CATEGORIE.contains(searchText) ||
-                    $0.UNITE.contains(searchText) ||
-                    $0.ALLERGENES.contains(searchText)
-                }
-            } else {
-                self.searchCollection = ingredientVM.ingredients
-            }
-            
+        .pickerStyle(.segmented)
+        
     }
 }
 
+
+
+
 struct IngredientView_Previews: PreviewProvider {
     static var previews: some View {
-        IngredientsView()
+        ProgressView()
     }
 }
+

@@ -33,7 +33,7 @@ class Ingredient : ObservableObject, Equatable {
     public var STOCK : Int;
     public var ALLERGENES : [String]
 
-     init(code : Int, libelle: String, categorie: String, prix_unitaire : Float, unite : String, stock : Int,allergenes:[String],id: String){
+    init(code : Int = 0, libelle: String = "", categorie: String = "", prix_unitaire : Float = 0.0, unite : String = "", stock : Int = 0,allergenes:[String] = [] ,id: String = ""){
         self.CODE = code;
         self.LIBELLE = libelle;
         self.CATEGORIE = categorie;

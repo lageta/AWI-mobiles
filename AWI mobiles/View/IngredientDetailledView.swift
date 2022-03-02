@@ -14,16 +14,21 @@ struct IngredientDetailledView: View {
     var intent : IngredientIntent = IngredientIntent()
     var viewModel : IngredientDetailViewModel
     var listViewModel : IngredientsViewModel
+    private var addMode : Bool
     
-    init(ingredient : Ingredient, listViewModel : IngredientsViewModel){
+    init(ingredient : Ingredient, listViewModel : IngredientsViewModel, addMode : Bool = false){
+        self.addMode = addMode
+        self.listViewModel = listViewModel
         self.ingredient = ingredient
         self.viewModel = IngredientDetailViewModel(model: ingredient)
-        self.listViewModel = listViewModel
         intent.addObserver(viewModel : self.viewModel, listViewModel : self.listViewModel)
+
+        
+
     }
     var body: some View {
         VStack {
-            TextField("Libelle :",text:$ingredient.LIBELLE).onSubmit {
+            TextField("",text:$ingredient.LIBELLE).onSubmit {
                 intent.intentToChange(libelle: ingredient.LIBELLE)
                 intent.intentToUpdateList()
             }
@@ -32,7 +37,8 @@ struct IngredientDetailledView: View {
             Text(String(self.ingredient.STOCK))
             Text(String(self.ingredient.PRIX_UNITAIRE))
         }
-        .navigationTitle(self.ingredient.LIBELLE)
+        
+        .navigationTitle(addMode ? "Ajouter un ingredient" : self.ingredient.LIBELLE)
     }
        
 }
