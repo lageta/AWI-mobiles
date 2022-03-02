@@ -12,7 +12,8 @@ import Firebase
 struct AWI_mobilesApp: App {
     var body: some Scene {
         WindowGroup {
-            IngredientsView()
+            //IngredientsView()
+            ContentView()
         }
     }
     

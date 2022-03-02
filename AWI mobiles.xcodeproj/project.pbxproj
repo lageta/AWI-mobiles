@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F31852827CF6D7F00964AF3 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F31852727CF6D7F00964AF3 /* MenuView.swift */; };
+		6F31852A27CF9AE400964AF3 /* CoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F31852927CF9AE400964AF3 /* CoutView.swift */; };
+		6F7C804127CFB1740047A0FF /* FicheTechniqueListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7C804027CFB1740047A0FF /* FicheTechniqueListView.swift */; };
 		6FB4EEBC27BFB48800EB15E6 /* AWI_mobilesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4EEBB27BFB48800EB15E6 /* AWI_mobilesApp.swift */; };
 		6FB4EEBE27BFB48800EB15E6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4EEBD27BFB48800EB15E6 /* ContentView.swift */; };
 		6FB4EEC027BFB48900EB15E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FB4EEBF27BFB48900EB15E6 /* Assets.xcassets */; };
@@ -47,6 +50,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6F31852727CF6D7F00964AF3 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		6F31852927CF9AE400964AF3 /* CoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoutView.swift; sourceTree = "<group>"; };
+		6F7C804027CFB1740047A0FF /* FicheTechniqueListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FicheTechniqueListView.swift; sourceTree = "<group>"; };
 		6FB4EEB827BFB48800EB15E6 /* AWI mobiles.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AWI mobiles.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FB4EEBB27BFB48800EB15E6 /* AWI_mobilesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWI_mobilesApp.swift; sourceTree = "<group>"; };
 		6FB4EEBD27BFB48800EB15E6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -164,6 +170,9 @@
 				6FB4EEBD27BFB48800EB15E6 /* ContentView.swift */,
 				6FB4EEF727BFC78700EB15E6 /* IngredientsView.swift */,
 				6FB4EF0027C38F9000EB15E6 /* IngredientDetailledView.swift */,
+				6F31852727CF6D7F00964AF3 /* MenuView.swift */,
+				6F31852927CF9AE400964AF3 /* CoutView.swift */,
+				6F7C804027CFB1740047A0FF /* FicheTechniqueListView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -343,12 +352,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FB4EF0627C4DF4400EB15E6 /* IngredientIntent.swift in Sources */,
+				6F31852A27CF9AE400964AF3 /* CoutView.swift in Sources */,
 				6FB4EF0127C38F9000EB15E6 /* IngredientDetailledView.swift in Sources */,
 				6FB4EEBE27BFB48800EB15E6 /* ContentView.swift in Sources */,
 				6FB4EEFA27BFCB5B00EB15E6 /* IngredientsViewModel.swift in Sources */,
 				6FB4EEF027BFBFBD00EB15E6 /* Allergene.swift in Sources */,
 				6FB4EEF227BFC06200EB15E6 /* Cout.swift in Sources */,
 				6FB4EEBC27BFB48800EB15E6 /* AWI_mobilesApp.swift in Sources */,
+				6F7C804127CFB1740047A0FF /* FicheTechniqueListView.swift in Sources */,
+				6F31852827CF6D7F00964AF3 /* MenuView.swift in Sources */,
 				6FB4EF0327C4DDD700EB15E6 /* IngredientDetailViewModel.swift in Sources */,
 				6FB4EEF827BFC78700EB15E6 /* IngredientsView.swift in Sources */,
 				6FB4EEFF27C38C7B00EB15E6 /* IngredientDB.swift in Sources */,

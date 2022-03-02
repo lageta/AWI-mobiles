@@ -12,6 +12,7 @@ import SwiftUI
 
 struct IngredientsView: View {
     
+    @Binding var showMenu: Bool
     @State private var searchText : String = ""
     @State private var isShowingdDetail : Bool = false
     var filter = ["Libelle", "Categorie", "Prix", "Stock", "Allergene"]
@@ -138,7 +139,7 @@ struct IngredientsView: View {
                 
                 EditButton()
                 NavigationLink(destination:IngredientDetailledView(ingredient: Ingredient(), listViewModel: ingredientVM , addMode: true), isActive: $isShowingdDetail) { EmptyView()}
-                
+                    
                 
                 Button (action : {
                     self.isShowingdDetail = true;
