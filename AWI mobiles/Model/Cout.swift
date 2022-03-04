@@ -7,7 +7,21 @@
 
 import Foundation
 
-class Cout {
+protocol CoutObserver {
+    func changed (useCharge : Bool)
+    func changed (usePerc :Bool)
+    func changed (coutProdPerc : Float)
+    func changed (coutProdFixe : Float)
+    func changed (tauxPers : Float)
+    func changed (tauxForf : Float)
+    func changed (coefCharge : Float)
+    func changed (coefWithoutCharge : Float)
+}
+
+class Cout : ObservableObject{
+    
+    var observer : CoutObserver?
+    
     var useCharge : Bool
     var usePerc : Bool
     var coutProdPerc : Float;

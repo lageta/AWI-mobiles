@@ -11,7 +11,7 @@ struct ContentView: View {
     
     @State var showMenu : Bool = false
     
-    @State var selectedView: SelectedView = .ingredient
+    @State var selectedView: SelectedView = .cout
     
     
     

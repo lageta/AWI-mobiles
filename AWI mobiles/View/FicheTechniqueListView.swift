@@ -9,6 +9,8 @@ import SwiftUI
 
 struct FicheTechniqueListView: View {
     @Binding var showMenu: Bool
+    
+    @StateObject var ftVM : FicheTechniqueListViewModel = FicheTechniqueListViewModel()
 
     var body: some View {
         Text("Hello, FT!")

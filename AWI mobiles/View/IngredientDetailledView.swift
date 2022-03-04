@@ -32,7 +32,10 @@ struct IngredientDetailledView: View {
                 intent.intentToChange(libelle: ingredient.LIBELLE)
                 intent.intentToUpdateList()
             }
-            Text(String(self.ingredient.CODE))
+            TextField("",value:$ingredient.CODE, formatter : NumberFormatter()).onSubmit {
+                intent.intentToChange(code: ingredient.CODE)
+                intent.intentToUpdateList()
+            }
             Text(self.ingredient.UNITE)
             Text(String(self.ingredient.STOCK))
             Text(String(self.ingredient.PRIX_UNITAIRE))
