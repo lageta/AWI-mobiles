@@ -34,7 +34,7 @@ struct FloatingTextFieldView : View {
                 TextField("", text: $text) { status in
                     DispatchQueue.main.async {
                         isEditing = status
-                        if isEditing {
+                        if isEditing || !text.isEmpty{
                             edges = EdgeInsets(top: 0, leading:15, bottom: 60, trailing: 0)
                         }
                         else {
@@ -50,8 +50,8 @@ struct FloatingTextFieldView : View {
                 }
             }
             .padding()
-            .background(RoundedRectangle(cornerRadius: 5)
-                            .stroke(Color("border")))
+            .background(RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.secondary))
             
             Text(placeHolder ?? "")
                 .background(Color(UIColor.systemBackground))
@@ -62,6 +62,8 @@ struct FloatingTextFieldView : View {
                     self.focusField = .fieldName
                 }
             
+        }.onAppear(){
+            edges = !text.isEmpty ?  EdgeInsets(top: 0, leading:15, bottom: 60, trailing: 0) : EdgeInsets(top: 0, leading:45, bottom: 0, trailing: 0)
         }
     }
 }

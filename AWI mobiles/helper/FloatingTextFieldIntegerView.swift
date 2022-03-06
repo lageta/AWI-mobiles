@@ -8,19 +8,12 @@ import Foundation
 import SwiftUI
 
 
-struct FloatingTextFieldFloatView : View {
-    
-    let formatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        return formatter
-    }()
-    
+struct FloatingTextFieldIntegerView : View {
     var leftIcon : String? = nil
     var rightIcon : String? = nil
     var placeHolder : String? = nil
     
-    @Binding var text : Float
+    @Binding var text : Int
     
     @State private var isEditing = false
     @State private var edges = EdgeInsets(top: 0, leading:45, bottom: 0, trailing: 0)
@@ -39,10 +32,10 @@ struct FloatingTextFieldFloatView : View {
                     Image(systemName: leftIcon ?? "person")
                         .foregroundColor(Color.secondary)
                 }
-                TextField("", value: $text, formatter: self.formatter) { status in
+                TextField("", value: $text, formatter: NumberFormatter()) { status in
                     DispatchQueue.main.async {
                         isEditing = status
-                        if isEditing || text.isNormal || text.isZero {
+                        if isEditing || text>=0 {
                             edges = EdgeInsets(top: 0, leading:15, bottom: 60, trailing: 0)
                         }
                         else {
@@ -71,7 +64,7 @@ struct FloatingTextFieldFloatView : View {
                 }
             
         }.onAppear(){
-            edges = (text.isNormal || text.isZero ) ?  EdgeInsets(top: 0, leading:15, bottom: 60, trailing: 0) : EdgeInsets(top: 0, leading:45, bottom: 0, trailing: 0)
+            edges = (text >= 0 ) ?  EdgeInsets(top: 0, leading:15, bottom: 60, trailing: 0) : EdgeInsets(top: 0, leading:45, bottom: 0, trailing: 0)
         }
     }
 }

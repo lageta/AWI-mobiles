@@ -7,7 +7,18 @@
 
 import Foundation
 
+protocol FicheTechniqueObserver {
+    func changed (intitule : String)
+    func changed (responsable :String)
+    func changed (nbCouvert : Int)
+    func changed (progression : [Any])
+    func changed (categorie : String)
+}
+
 class FicheTechnique {
+    
+    var observer : FicheTechniqueObserver?
+    
     var id : String
     var intitule : String
     var responsable : String

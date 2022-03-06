@@ -14,26 +14,35 @@ import Combine
 
 enum CoutViewModelError : Error, CustomStringConvertible, Equatable{
    case noError
-   case nameError(String)
-   case ramError(Int)
+    case coutProdPercError(Float)
+    case coutProdFixeError(Float)
+    case tauxPersError(Float)
+    case tauxForfError(Float)
+    case  coefChargeError(Float)
+    case  coefWithoutChargeError(Float)
     
     var description: String{
-          switch self {
-             case .nameError(let name) : return "Error in name : \(name)"
-             case .ramError(let ram):    return "Error, ram must be a power of two and \(ram) is not"
-             case .noError : return "No error"
-          }
-       }
+        switch self {
+        case .coutProdPercError(let cout): return ""
+        case .coutProdFixeError(let cout):return ""
+        case .tauxPersError(let taux):return ""
+        case .tauxForfError(let taux):return ""
+        case  .coefChargeError(let taux):return ""
+        case .coefWithoutChargeError(let taux):return ""
+      
+        case .noError : return "No error"
+        }
     }
-   
+}
+
 
 class CoutViewModel : ObservableObject,Subscriber, CoutObserver  {
-    
+    private var firestore = Firestore.firestore()
     let coutDB = CoutDB()
     typealias Input = CoutIntentState
     typealias Failure = Never
     
-    @Published var error : CoutViewModelError = .noError
+    @Published var error : String = CoutViewModelError.noError.description
     
     private var cout : Cout
     @Published var useCharge : Bool
@@ -58,6 +67,7 @@ class CoutViewModel : ObservableObject,Subscriber, CoutObserver  {
         self.coefCharge = model.coefCharge
         
         self.cout.observer = self
+       
     }
     func changeModel(model : Cout){
         self.cout = model
@@ -71,7 +81,29 @@ class CoutViewModel : ObservableObject,Subscriber, CoutObserver  {
         self.coefCharge = model.coefCharge
         
         self.cout.observer = self
-        //self.objectWillChange.send()
+        
+    }
+    
+    func fetchData() {
+        firestore.collection("Coûts").addSnapshotListener { (querySnapshot, error) in
+            guard let document = querySnapshot?.documents else {
+              print("No documents")
+              return
+            }
+            self.cout =  Cout(
+                    useCharge : document[0]["useCharge"] as? Bool ?? false,
+                    usePerc : document[0]["usePerc"] as? Bool ?? false,
+                    coutProdPerc : document[0]["coutProdPerc"] as? Float ?? 0.0,
+                     coutProdFixe :  document[0]["coutProdFixe"] as? Float ?? 0.0,
+                     tauxPers :  document[0]["tauxPers"] as? Float ?? 0.0,
+                     tauxForf :  document[0]["tauxForf"] as? Float ?? 0.0,
+                     coefCharge :  document[0]["coefCharge"] as? Float ?? 0.0,
+                     coefWithoutCharge :  document[0]["coefWithoutCharge"] as? Float ?? 0.0
+                )
+           print("cout updated")
+            
+        }
+        
     }
     
     
@@ -102,25 +134,56 @@ class CoutViewModel : ObservableObject,Subscriber, CoutObserver  {
                            print("vm: error detected => self.ram = '\(self.model.ram)'")
                         }
              */
+            if coef != self.cout.coefWithoutCharge {
+                self.error = CoutViewModelError.coefWithoutChargeError(coef).description
+                self.coefWithoutCharge = self.cout.coefWithoutCharge
+            }
+            
         case .coefChargeChanging(let coef):
             self.cout.coefCharge = coef
             coutDB.updateSpecificFieldCout(field: .coefCharge, newValue: coef)
+            if coef != self.cout.coefCharge {
+                self.error = CoutViewModelError.coefChargeError(coef).description
+                self.coefCharge = self.cout.coefCharge
+            }
             
         case .tauxForfChanging(let taux):
             self.cout.tauxForf = taux
             coutDB.updateSpecificFieldCout(field: .tauxForf, newValue: taux)
+            if taux != self.cout.tauxForf {
+                self.error = CoutViewModelError.tauxForfError(taux).description
+                self.tauxForf = self.cout.tauxForf
+            }
             
         case .tauxPersChanging(let taux):
             self.cout.tauxPers = taux
             coutDB.updateSpecificFieldCout(field: .tauxPers, newValue: taux)
+            if taux != self.cout.tauxPers {
+                self.error = CoutViewModelError.tauxPersError(taux).description
+                self.tauxPers = self.cout.tauxPers
+            }
             
         case .coutProdFixeChanging(let cout):
             self.cout.coutProdFixe = cout
             coutDB.updateSpecificFieldCout(field: .coutProdFixe, newValue: cout)
+            if cout != self.cout.coutProdFixe {
+                self.error = CoutViewModelError.coutProdFixeError(cout).description
+                self.coutProdFixe = self.cout.coutProdFixe
+            }
             
         case .coutProdPercChanging(let cout):
             self.cout.coutProdPerc = cout
-            coutDB.updateSpecificFieldCout(field: .coutProdPerc, newValue: cout)
+            print( cout )
+            print(self.coutProdPerc)
+            if cout != self.cout.coutProdPerc {
+                print("heloo")
+                self.error = CoutViewModelError.coutProdPercError(cout).description
+                self.coutProdPerc = self.cout.coutProdPerc
+                self.objectWillChange.send()
+              
+            }else {
+                coutDB.updateSpecificFieldCout(field: .coutProdPerc, newValue: cout)
+            }
             
         case .useChargeChanging(let use):
             self.cout.useCharge = use
@@ -162,7 +225,6 @@ class CoutViewModel : ObservableObject,Subscriber, CoutObserver  {
     
     func changed(coefCharge: Float) {
         self.coefCharge = coefCharge
-        print("hellooooooo")
     }
     
     func changed(coefWithoutCharge: Float) {

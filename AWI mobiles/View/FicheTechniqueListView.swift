@@ -14,6 +14,24 @@ struct FicheTechniqueListView: View {
 
     var body: some View {
         Text("Hello, FT!")
+        VStack{
+            NavigationView{
+                List{
+                    ForEach(ftVM.ficheTechniques, id: \.id){
+                        ficheTechnique in
+                        NavigationLink(destination:FicheTechniqueDetailView(ficheTechnique: ficheTechnique, listViewModel: ftVM)){
+                            Text(ficheTechnique.intitule)
+                            
+                        }
+                        
+                    }
+                }
+            }
+            .onAppear{
+                ftVM.fetchData()
+            }
+            
+        }
     }
 }
 

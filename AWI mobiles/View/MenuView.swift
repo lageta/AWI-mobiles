@@ -13,7 +13,7 @@ struct MenuView: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Image(systemName: "bookmarks")
+                Image(systemName: "list.bullet.rectangle")
                     .foregroundColor(.gray)
                     .imageScale(.large)
                 Button("Fiche techniques", action: {selectedView = .ficheTechnique })

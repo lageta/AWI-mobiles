@@ -9,7 +9,8 @@ import SwiftUI
 
 struct CoutView: View {
     @Binding var showMenu : Bool
-    
+    @State var errorMessage = "Error !"
+    @State var showingAlert : Bool = false
     let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
@@ -17,7 +18,7 @@ struct CoutView: View {
     }()
     
     var intent : CoutIntent = CoutIntent()
-    @StateObject var viewModel : CoutViewModel = CoutViewModel(model: Cout(useCharge: false, usePerc: false, coutProdPerc: 0, coutProdFixe: 0, tauxPers: 0, tauxForf: 0, coefCharge: 0, coefWithoutCharge: 0))
+    @StateObject var viewModel : CoutViewModel = CoutViewModel(model: Cout(useCharge: false, usePerc: false, coutProdPerc: 0, coutProdFixe: 1, tauxPers: 0, tauxForf: 0, coefCharge: 0, coefWithoutCharge: 0))
     
     init(showMenu : Binding<Bool>){
         self._showMenu = showMenu
@@ -35,6 +36,7 @@ struct CoutView: View {
             VStack {
                 
                 VStack {
+                    
                     Text("Coût des assaisnonements  :")
                     HStack {
                         Spacer()
@@ -74,7 +76,10 @@ struct CoutView: View {
                     Spacer()
                 }
                 
+                Divider().foregroundColor(Color.secondary)
+                
                 VStack {
+                    Text("Utiliser le coût des charges pour les calculs des coûts ?")
                     HStack{
                         Spacer()
                         Picker("", selection: $selectedUseCharge) {
@@ -85,7 +90,7 @@ struct CoutView: View {
                         Spacer()
                     }
                     
-                    Text("Utiliser le coût des charges pour les calculs des coûts ?")
+                  
                     
                     
                 }
@@ -94,7 +99,7 @@ struct CoutView: View {
                     switch selectedUseCharge {
                         
                     case useChargeChoice[0]:
-                        Text("Coût d'assaisonement en pourcentage :")
+                       
                         
                         Text("Coût des charges")
                         HStack{
@@ -139,11 +144,13 @@ struct CoutView: View {
             }
             
             .onAppear(){
+             
                 Task {
                     
                     if  let cout = try? await viewModel.coutDB.getCout() {
                         self.viewModel.changeModel(model: cout)
-                        
+                        self.viewModel.objectWillChange.send()
+                        print(viewModel.coefCharge)
                         if cout.useCharge {
                             self.selectedUseCharge = useChargeChoice[0]
                         }
@@ -185,6 +192,17 @@ struct CoutView: View {
                 default :
                     break
                 }
+            }
+            
+            .onChange(of: viewModel.error){ error in
+                print("erreur")
+                if !(error == CoutViewModelError.noError.description){
+                    self.errorMessage = "\(error)"
+                    self.showingAlert = true
+                }
+            }
+            .alert("\(errorMessage)", isPresented: $showingAlert){
+               Button("Ok", role: .cancel){}
             }
             
             .navigationTitle("Gestion des coûts")

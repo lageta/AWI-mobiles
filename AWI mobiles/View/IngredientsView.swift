@@ -44,8 +44,8 @@ struct IngredientsView: View {
                         ingredient in
                         NavigationLink(destination:IngredientDetailledView(ingredient: ingredient, listViewModel: ingredientVM,addMode: false)){
                             
-                            Text(ingredient.LIBELLE)
-                            /*
+                         
+                            
                              
                              switch selectedFilter{
                              case "Libelle":
@@ -57,6 +57,7 @@ struct IngredientsView: View {
                              else {
                              Text(ingredient.LIBELLE).bold()
                              }
+                            /*
                              Spacer()
                              }
                              HStack {
@@ -72,39 +73,109 @@ struct IngredientsView: View {
                              
                              Text("\(String(ingredient.PRIX_UNITAIRE))€").foregroundColor(.mint)
                              .font(.system(size : 12))
-                             Spacer()
+                             Spacer() */
                              }
                              
                              }
                              
                              case"Categorie":
-                             
-                             Text(ingredient.CATEGORIE)
+                                 VStack{
+                                     HStack {
+                                         Text(ingredient.CATEGORIE)
+                                         Spacer()
+                                     }
+                                     
+                                     HStack {
+                                         if ingredient.ALLERGENES.isEmpty {
+                                             Text(ingredient.LIBELLE).foregroundColor(Color.secondary)
+                                             .font(.system(size : 14))
+                                         }
+                                         else {
+                                             Text(ingredient.LIBELLE).foregroundColor(Color.secondary)
+                                                 .font(.system(size : 14)).bold()
+                                         }
+                                         Spacer()
+                                     }
+                                    
+                                        
+                                 }
+                            
                              
                              case "Prix":
-                             
-                             Text(String(ingredient.PRIX_UNITAIRE))
-                             
+                                 VStack {
+                                     HStack {
+                                         Text(String(ingredient.PRIX_UNITAIRE))
+                                         Spacer()
+                                     }
+                                     HStack {
+                                         if ingredient.ALLERGENES.isEmpty {
+                                             Text(ingredient.LIBELLE).foregroundColor(Color.secondary)
+                                             .font(.system(size : 14))
+                                         }
+                                         else {
+                                             Text(ingredient.LIBELLE).foregroundColor(Color.secondary)
+                                                 .font(.system(size : 14)).bold()
+                                         }
+                                         Spacer()
+                                     }
+                                 }
+                            
+                                
                              
                              case "Stock":
-                             
-                             Text(String(ingredient.STOCK))
+                                 VStack{
+                                     HStack{
+                                         Text(String(ingredient.STOCK))
+                                         Spacer()
+                                     }
+                                     HStack {
+                                         if ingredient.ALLERGENES.isEmpty {
+                                             Text(ingredient.LIBELLE).foregroundColor(Color.secondary)
+                                             .font(.system(size : 14))
+                                         }
+                                         else {
+                                             Text(ingredient.LIBELLE).foregroundColor(Color.secondary)
+                                                 .font(.system(size : 14)).bold()
+                                         }
+                                         Spacer()
+                                     }
+                                 }
+                            
+                            
                              
                              
                              case "Allergene":
                              
-                             ForEach (ingredient.ALLERGENES, id : \.self) {
-                             allergene in
-                             Text(allergene).bold()
-                             
-                             }
+                                 VStack {
+                                     HStack{
+                                         ForEach (ingredient.ALLERGENES, id : \.self) {
+                                         allergene in
+                                         Text(allergene).bold()
+                                         
+                                         }
+                                         Spacer()
+                                     }
+                                     HStack {
+                                         if ingredient.ALLERGENES.isEmpty {
+                                             Text(ingredient.LIBELLE).foregroundColor(Color.secondary)
+                                             .font(.system(size : 14))
+                                         }
+                                         else {
+                                             Text(ingredient.LIBELLE).foregroundColor(Color.secondary)
+                                                 .font(.system(size : 14)).bold()
+                                         }
+                                         Spacer()
+                                     }
+                                 }
+                            
+                           
                              default:
                              
                              Text(ingredient.LIBELLE)
                              
                              
                              
-                             }*/
+                             }
                             
                         }
                         
@@ -120,10 +191,10 @@ struct IngredientsView: View {
                     
                     
                     
-                
+                    
                 }
                 
-                
+                .listStyle(InsetGroupedListStyle())
                 .refreshable{
                     ingredientVM.fetchData()
                 }
@@ -136,16 +207,22 @@ struct IngredientsView: View {
                     }
                     
                 }
-                
-                EditButton()
-                NavigationLink(destination:IngredientDetailledView(ingredient: Ingredient(), listViewModel: ingredientVM , addMode: true), isActive: $isShowingdDetail) { EmptyView()}
+                EditButton().padding(5)
+                HStack{
+                    Spacer()
+                   
+                    NavigationLink(destination:IngredientDetailledView(ingredient: Ingredient(), listViewModel: ingredientVM , addMode: true), isActive: $isShowingdDetail) { EmptyView()}
+                    
+                    
+                    Button (action : {
+                        self.isShowingdDetail = true;
+                    }){
+                        Image(systemName: "plus.circle.fill").font(.largeTitle).foregroundColor(.blue)
+                    }
                     
                 
-                Button (action : {
-                    self.isShowingdDetail = true;
-                }){
-                    Image(systemName: "plus.circle.fill").font(.largeTitle).foregroundColor(.blue)
-                }
+                }.padding(10)
+              
                 
                 
             }

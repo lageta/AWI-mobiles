@@ -17,7 +17,7 @@ protocol IngredientObserver {
     func changed (allergenes : [String])
 }
 
-class Ingredient : ObservableObject, Equatable {
+class Ingredient : ObservableObject, Equatable, Hashable{
     
     var observer : IngredientObserver?
     static func == (lhs: Ingredient, rhs: Ingredient) -> Bool {
@@ -42,5 +42,9 @@ class Ingredient : ObservableObject, Equatable {
         self.id = id
         self.STOCK = stock
         self.ALLERGENES = allergenes
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.id)
     }
 }

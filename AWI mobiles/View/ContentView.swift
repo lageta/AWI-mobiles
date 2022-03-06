@@ -14,7 +14,6 @@ struct ContentView: View {
     @State var selectedView: SelectedView = .cout
     
     
-    
     var body: some View {
         
         let drag = DragGesture()
@@ -25,7 +24,7 @@ struct ContentView: View {
                     }
                 }
             }
-        
+        	
         return NavigationView {
             GeometryReader { geometry in
                 ZStack(alignment: .leading) {
