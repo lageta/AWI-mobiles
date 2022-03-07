@@ -18,7 +18,7 @@ enum FicheTechniqueIntentState : CustomStringConvertible, Equatable{
     case categorieChanging(String)
     case nbCouvertChanging(Int)
     case responsableChanging(String)
-    case progressionChanging([Any])
+    case progressionChanging([Progression])
     
     var description: String{
         switch self{
@@ -61,7 +61,7 @@ struct FicheTechniqueIntent {
     func intentToChange(nbCouvert : Int){
         self.state.send(.nbCouvertChanging(nbCouvert))
     }
-    func intentToChange(progression : [Any]){
+    func intentToChange(progression : [Progression]){
         self.state.send(.progressionChanging(progression))
     }
     func intentToChange(categorie : String){

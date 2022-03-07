@@ -7,11 +7,16 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 class FicheTechniqueDetailViewModel : ObservableObject, FicheTechniqueObserver, Subscriber{
     
     private var ficheTechniqueDB = FicheTechniqueDB()
     private var ingredientsDB = IngredientDB()
+    private var coutDB = CoutDB()
+    @Published var cout : Cout = Cout(useCharge: false, usePerc: false, coutProdPerc: 0, coutProdFixe: 1, tauxPers: 0, tauxForf: 0, coefCharge: 0, coefWithoutCharge: 0)
+    
+    
     
     typealias Input = FicheTechniqueIntentState
     typealias Failure = Never
@@ -22,7 +27,7 @@ class FicheTechniqueDetailViewModel : ObservableObject, FicheTechniqueObserver, 
     @Published var intitule : String
     @Published var responsable : String
     @Published var nbCouvert : Int
-    @Published var progression : [Any]
+    @Published var progression : [Progression]
     @Published var categorie : String
     
     @Published var intentState : FicheTechniqueIntentState
@@ -39,8 +44,20 @@ class FicheTechniqueDetailViewModel : ObservableObject, FicheTechniqueObserver, 
         self.ficheTechnique.observer = self
     }
     
+    func createFicheTechnique(ficheTechnique : FicheTechnique){
+        self.ficheTechniqueDB.createFicheTechnique(ficheTechnique: ficheTechnique)
+    }
+    
+    func deleteFicheTechnique(ficheTechnique : FicheTechnique){
+        self.ficheTechniqueDB.deleteFicheTechnique(ficheTechnique: ficheTechnique)
+    }
+    
     func getIngredients() async{
         self.ingredients = await ingredientsDB.getIngredients()
+    }
+    
+    func getCout() async{
+        await cout = coutDB.getCout()
     }
     
     func changed(intitule: String) {
@@ -55,7 +72,7 @@ class FicheTechniqueDetailViewModel : ObservableObject, FicheTechniqueObserver, 
         self.nbCouvert = nbCouvert
     }
     
-    func changed(progression: [Any]) {
+    func changed(progression: [Progression]) {
         self.progression = progression
     }
     
@@ -93,7 +110,6 @@ class FicheTechniqueDetailViewModel : ObservableObject, FicheTechniqueObserver, 
             print(ficheTechnique.progression)
             
         }
-        
         return .none
     }
     

@@ -14,12 +14,12 @@ import Combine
 
 enum CoutViewModelError : Error, CustomStringConvertible, Equatable{
    case noError
-    case coutProdPercError(Float)
-    case coutProdFixeError(Float)
-    case tauxPersError(Float)
-    case tauxForfError(Float)
-    case  coefChargeError(Float)
-    case  coefWithoutChargeError(Float)
+    case coutProdPercError(Double)
+    case coutProdFixeError(Double)
+    case tauxPersError(Double)
+    case tauxForfError(Double)
+    case  coefChargeError(Double)
+    case  coefWithoutChargeError(Double)
     
     var description: String{
         switch self {
@@ -47,12 +47,12 @@ class CoutViewModel : ObservableObject,Subscriber, CoutObserver  {
     private var cout : Cout
     @Published var useCharge : Bool
     @Published var usePerc : Bool
-    @Published var coutProdPerc : Float
-    @Published var coutProdFixe : Float
-    @Published  var tauxPers : Float
-    @Published  var tauxForf : Float
-    @Published var coefCharge : Float
-    @Published  var coefWithoutCharge : Float
+    @Published var coutProdPerc : Double
+    @Published var coutProdFixe : Double
+    @Published  var tauxPers : Double
+    @Published  var tauxForf : Double
+    @Published var coefCharge : Double
+    @Published  var coefWithoutCharge : Double
     
     
     init(model : Cout){
@@ -93,12 +93,12 @@ class CoutViewModel : ObservableObject,Subscriber, CoutObserver  {
             self.cout =  Cout(
                     useCharge : document[0]["useCharge"] as? Bool ?? false,
                     usePerc : document[0]["usePerc"] as? Bool ?? false,
-                    coutProdPerc : document[0]["coutProdPerc"] as? Float ?? 0.0,
-                     coutProdFixe :  document[0]["coutProdFixe"] as? Float ?? 0.0,
-                     tauxPers :  document[0]["tauxPers"] as? Float ?? 0.0,
-                     tauxForf :  document[0]["tauxForf"] as? Float ?? 0.0,
-                     coefCharge :  document[0]["coefCharge"] as? Float ?? 0.0,
-                     coefWithoutCharge :  document[0]["coefWithoutCharge"] as? Float ?? 0.0
+                    coutProdPerc : document[0]["coutProdPerc"] as? Double ?? 0.0,
+                     coutProdFixe :  document[0]["coutProdFixe"] as? Double ?? 0.0,
+                     tauxPers :  document[0]["tauxPers"] as? Double ?? 0.0,
+                     tauxForf :  document[0]["tauxForf"] as? Double ?? 0.0,
+                     coefCharge :  document[0]["coefCharge"] as? Double ?? 0.0,
+                     coefWithoutCharge :  document[0]["coefWithoutCharge"] as? Double ?? 0.0
                 )
            print("cout updated")
             
@@ -207,27 +207,27 @@ class CoutViewModel : ObservableObject,Subscriber, CoutObserver  {
         self.usePerc = usePerc
     }
     
-    func changed(coutProdPerc: Float) {
+    func changed(coutProdPerc: Double) {
         self.coutProdPerc = coutProdPerc
     }
     
-    func changed(coutProdFixe: Float) {
+    func changed(coutProdFixe: Double) {
         self.coutProdFixe = coutProdFixe
     }
     
-    func changed(tauxPers: Float) {
+    func changed(tauxPers: Double) {
         self.tauxPers = tauxPers
     }
     
-    func changed(tauxForf: Float) {
+    func changed(tauxForf: Double) {
         self.tauxForf = tauxForf
     }
     
-    func changed(coefCharge: Float) {
+    func changed(coefCharge: Double) {
         self.coefCharge = coefCharge
     }
     
-    func changed(coefWithoutCharge: Float) {
+    func changed(coefWithoutCharge: Double) {
         self.coefWithoutCharge = coefWithoutCharge
     }
     

@@ -15,12 +15,12 @@ enum IngredientIntentState : CustomStringConvertible, Equatable{
     case categorieChanging(String)
     case uniteChanging(String)
     case stockChanging(Int)
-    case prix_unitaireChanging(Float)
+    case prix_unitaireChanging(Double)
     case allergenesChanging([String])
-    
+    case createIngredient(Ingredient)
     var description: String{
         switch self{
-        default: return "flemme"
+        default: return ""
         }
     }
     
@@ -55,7 +55,7 @@ struct IngredientIntent {
     func intentToChange(stock : Int){
         self.state.send(.stockChanging(stock))
     }
-    func intentToChange(prix_unitaire : Float){
+    func intentToChange(prix_unitaire : Double){
         self.state.send(.prix_unitaireChanging(prix_unitaire))
     }
     func intentToChange(allergenes : [String]){
@@ -66,5 +66,8 @@ struct IngredientIntent {
     }
     func ListUpdated(){
         self.stateList.send(.ready)
+    }
+    func intentToCreateIngredient(ingredient : Ingredient){
+        self.state.send(.createIngredient(ingredient))
     }
 }

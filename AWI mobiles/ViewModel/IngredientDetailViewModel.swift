@@ -11,6 +11,7 @@ import Combine
 class IngredientDetailViewModel : ObservableObject, IngredientObserver, Subscriber{
     
     private var ingredientDB = IngredientDB()
+    private var ficheTechniqueDB = FicheTechniqueDB()
     
     typealias Input = IngredientIntentState
     typealias Failure = Never
@@ -19,7 +20,7 @@ class IngredientDetailViewModel : ObservableObject, IngredientObserver, Subscrib
     @Published var code : Int
     @Published var libelle : String
     @Published var categorie : String
-    @Published var prix_unitaire : Float
+    @Published var prix_unitaire : Double
     @Published var stock : Int
     @Published var unite : String
     @Published var allergenes : [String]
@@ -52,7 +53,7 @@ class IngredientDetailViewModel : ObservableObject, IngredientObserver, Subscrib
         self.categorie = categorie
     }
     
-    func changed(prix_unitaire: Float) {
+    func changed(prix_unitaire: Double) {
         self.prix_unitaire = prix_unitaire
     }
     
@@ -83,24 +84,61 @@ class IngredientDetailViewModel : ObservableObject, IngredientObserver, Subscrib
             case .ready : break
             case .codeChanging(let code):
                 self.ingredient.CODE = code
+                ingredientDB.updateIngredient(ingredient: ingredient)
+                Task{
+                    await ficheTechniqueDB.updateFicheTechniqueByIngredients(ingredient: ingredient)
+                }
+            
             case .libelleChanging(let libelle):
                 self.ingredient.LIBELLE = libelle
+            ingredientDB.updateIngredient(ingredient: ingredient)
+            Task{
+                await ficheTechniqueDB.updateFicheTechniqueByIngredients(ingredient: ingredient)
+            }
+
             case .categorieChanging(let categorie):
                 self.ingredient.CATEGORIE = categorie
+            ingredientDB.updateIngredient(ingredient: ingredient)
+            Task{
+                await ficheTechniqueDB.updateFicheTechniqueByIngredients(ingredient: ingredient)
+            }
+
             case.uniteChanging(let unite):
                 self.ingredient.UNITE = unite
+            ingredientDB.updateIngredient(ingredient: ingredient)
+            Task{
+                await ficheTechniqueDB.updateFicheTechniqueByIngredients(ingredient: ingredient)
+            }
+
             case .stockChanging(let stock):
                 self.ingredient.STOCK = stock
+            ingredientDB.updateIngredient(ingredient: ingredient)
+            Task{
+                await ficheTechniqueDB.updateFicheTechniqueByIngredients(ingredient: ingredient)
+            }
+
             case .prix_unitaireChanging(let prix_unitaire):
                 self.ingredient.PRIX_UNITAIRE = prix_unitaire
+            ingredientDB.updateIngredient(ingredient: ingredient)
+            Task{
+                await ficheTechniqueDB.updateFicheTechniqueByIngredients(ingredient: ingredient)
+            }
+
             case .allergenesChanging(let allergenes):
                 self.ingredient.ALLERGENES = allergenes
+            ingredientDB.updateIngredient(ingredient: ingredient)
+            Task{
+                await ficheTechniqueDB.updateFicheTechniqueByIngredients(ingredient: ingredient)
+            }
+
+            
+        case .createIngredient(let ingredient):
+            self.ingredientDB.createIngredient(ingredient: ingredient)
 
         }
         
-        if(input != .ready){
-            ingredientDB.updateIngredient(ingredient: ingredient)
-        }
+        
+    
         
         return .none
     }

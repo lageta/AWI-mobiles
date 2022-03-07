@@ -24,7 +24,7 @@ struct IngredientDB {
                 code: doc["CODE"] as? Int ?? 0,
                 libelle: doc["LIBELLE"] as? String ?? "",
                 categorie: doc["CATEGORIE"] as? String ?? "",
-                prix_unitaire: doc["PRIX_UNITAIRE"] as? Float ?? 0,
+                prix_unitaire: doc["PRIX_UNITAIRE"] as? Double ?? 0,
                 unite: doc["UNITE"] as? String ?? "",
                 stock: doc["STOCK"] as? Int ?? 0,
                 allergenes: doc["ALLERGENES"] as? [String] ?? [],

@@ -18,17 +18,18 @@ struct MenuView: View {
                     .imageScale(.large)
                 Button("Fiche techniques", action: {selectedView = .ficheTechnique })
                     .foregroundColor(.gray)
-                    .font(.headline)
+                    .font(.system(size : 14))
+                    
             }
             .padding(.top, 100)
             HStack {
-                Image(systemName: "person")
+                Image(systemName: "hare")
                     .foregroundColor(.gray)
                     .imageScale(.large)
                 // Text("Profile")
                 Button("Liste des ingrédients", action: {selectedView = .ingredient })
                     .foregroundColor(.gray)
-                    .font(.headline)
+                    .font(.system(size : 14))
             }
             .padding(.top, 30)
            
@@ -38,17 +39,20 @@ struct MenuView: View {
                     .imageScale(.large)
                 Button("Gestion des coûts", action: {selectedView = .cout })
                     .foregroundColor(.gray)
-                    .font(.headline)
+                    .font(.system(size : 14))
             }
             .padding(.top, 30)
             Spacer()
         }
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color(red: 32/255, green: 32/255, blue: 32/255))
+        .background(Color(red: 32/255, green: 32/255, blue: 60/255))
         .edgesIgnoringSafeArea(.all)
     }
 }
+
+
+
 
 enum SelectedView {
     case ingredient

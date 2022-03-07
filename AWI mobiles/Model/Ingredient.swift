@@ -11,7 +11,7 @@ protocol IngredientObserver {
     func changed (code : Int)
     func changed (libelle :String)
     func changed (categorie : String)
-    func changed (prix_unitaire : Float)
+    func changed (prix_unitaire : Double)
     func changed (unite : String)
     func changed (stock : Int)
     func changed (allergenes : [String])
@@ -28,12 +28,12 @@ class Ingredient : ObservableObject, Equatable, Hashable{
     public var CODE : Int;
     public var LIBELLE : String;
     public var CATEGORIE : String;
-    public var PRIX_UNITAIRE : Float;
+    public var PRIX_UNITAIRE : Double;
     public var UNITE : String;
     public var STOCK : Int;
     public var ALLERGENES : [String]
 
-    init(code : Int = 0, libelle: String = "", categorie: String = "", prix_unitaire : Float = 0.0, unite : String = "", stock : Int = 0,allergenes:[String] = [] ,id: String = ""){
+    init(code : Int = 0, libelle: String = "", categorie: String = "", prix_unitaire : Double = 0.0, unite : String = "", stock : Int = 0,allergenes:[String] = [] ,id: String = ""){
         self.CODE = code;
         self.LIBELLE = libelle;
         self.CATEGORIE = categorie;

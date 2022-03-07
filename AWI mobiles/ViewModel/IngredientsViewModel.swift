@@ -57,7 +57,7 @@ class IngredientsViewModel : ObservableObject, Subscriber {
                     code: data["CODE"] as? Int ?? 0,
                     libelle: data["LIBELLE"] as? String ?? "",
                     categorie: data["CATEGORIE"] as? String ?? "",
-                    prix_unitaire: data["PRIX_UNITAIRE"] as? Float ?? 0,
+                    prix_unitaire: data["PRIX_UNITAIRE"] as? Double ?? 0,
                     unite: data["UNITE"] as? String ?? "",
                     stock: data["STOCK"] as? Int ?? 0,
                     allergenes: data["ALLERGENES"] as? [String] ?? [],
@@ -106,9 +106,9 @@ class IngredientsViewModel : ObservableObject, Subscriber {
                 foo  = ingredients.sorted(by: {$0.STOCK < $1.STOCK})
             case "Allergene":
                foo = ingredients.filter {!$0.ALLERGENES.isEmpty}
-            if !foo.isEmpty && foo.count > 2 {
-                foo = filteredIngredients.sorted(by: {$0.ALLERGENES[0] < $1.ALLERGENES[0]})
-            }
+            //if !foo.isEmpty && foo.count > 1 {
+                //foo = filteredIngredients.sorted(by: {$0.ALLERGENES[0] < $1.ALLERGENES[0]})
+            //}
                 
                 
             default:
@@ -118,7 +118,7 @@ class IngredientsViewModel : ObservableObject, Subscriber {
             if !searchText.isEmpty {
                 self.filteredIngredients = foo.filter{ $0.LIBELLE.contains(searchText) ||
                     $0.CODE==(Int(searchText)) ||
-                    $0.PRIX_UNITAIRE==(Float(searchText)) ||
+                    $0.PRIX_UNITAIRE==(Double(searchText)) ||
                     $0.STOCK==(Int(searchText)) ||
                     $0.CATEGORIE.contains(searchText) ||
                     $0.UNITE.contains(searchText) ||

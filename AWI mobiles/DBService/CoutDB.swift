@@ -20,12 +20,12 @@ struct CoutDB {
             return Cout(
                 useCharge : data["useCharge"] as? Bool ?? false,
                 usePerc : data["usePerc"] as? Bool ?? false,
-                coutProdPerc : data["coutProdPerc"] as? Float ?? 0.0,
-                 coutProdFixe :  data["coutProdFixe"] as? Float ?? 0.0,
-                 tauxPers :  data["tauxPers"] as? Float ?? 0.0,
-                 tauxForf :  data["tauxForf"] as? Float ?? 0.0,
-                 coefCharge :  data["coefCharge"] as? Float ?? 0.0,
-                 coefWithoutCharge :  data["coefWithoutCharge"] as? Float ?? 0.0
+                coutProdPerc : data["coutProdPerc"] as? Double ?? 0.0,
+                 coutProdFixe :  data["coutProdFixe"] as? Double ?? 0.0,
+                 tauxPers :  data["tauxPers"] as? Double ?? 0.0,
+                 tauxForf :  data["tauxForf"] as? Double ?? 0.0,
+                 coefCharge :  data["coefCharge"] as? Double ?? 0.0,
+                 coefWithoutCharge :  data["coefWithoutCharge"] as? Double ?? 0.0
             )
         }
          return Cout(

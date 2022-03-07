@@ -11,7 +11,7 @@ struct ContentView: View {
     
     @State var showMenu : Bool = false
     
-    @State var selectedView: SelectedView = .cout
+    @State var selectedView: SelectedView = .ingredient
     
     
     var body: some View {
@@ -24,7 +24,15 @@ struct ContentView: View {
                     }
                 }
             }
-        	
+        
+       /* let tap =  TapGesture()
+            .onEnded {
+                
+                withAnimation {
+                    self.showMenu = false
+                }
+                
+            }*/
         return NavigationView {
             GeometryReader { geometry in
                 ZStack(alignment: .leading) {
@@ -34,17 +42,17 @@ struct ContentView: View {
                     case .ingredient :
                         IngredientsView(showMenu: self.$showMenu)
                             .frame(width: geometry.size.width, height: geometry.size.height)
-                            .offset(x: self.showMenu ? geometry.size.width/2 : 0)
+                            .offset(x: self.showMenu ? geometry.size.width/2.5 : 0)
                             .disabled(self.showMenu ? true : false)
                     case .cout :
                         CoutView(showMenu : self.$showMenu)
                             .frame(width: geometry.size.width, height: geometry.size.height)
-                            .offset(x: self.showMenu ? geometry.size.width/2 : 0)
+                            .offset(x: self.showMenu ? geometry.size.width/2.5 : 0)
                             .disabled(self.showMenu ? true : false)
                     case .ficheTechnique :
                         FicheTechniqueListView(showMenu : self.$showMenu)
                             .frame(width: geometry.size.width, height: geometry.size.height)
-                            .offset(x: self.showMenu ? geometry.size.width/2 : 0)
+                            .offset(x: self.showMenu ? geometry.size.width/2.5 : 0)
                             .disabled(self.showMenu ? true : false)
                     }
                     
@@ -52,20 +60,22 @@ struct ContentView: View {
                     
                     if self.showMenu {
                         MenuView(selectedView : self.$selectedView)
-                            .frame(width: geometry.size.width/2)
+                            .frame(width: geometry.size.width/2.5)
                             .transition(.move(edge: .leading))
                         
                     }
                 }
                 .gesture(drag)
+               // .gesture(tap)
+                
             }
-            .navigationBarTitle("Projet IOs", displayMode: .inline)
+            .navigationBarTitle("Projet iOS", displayMode: .inline)
             .navigationBarItems(leading: (
                 Button(action: {
                     withAnimation {
                         self.showMenu.toggle()
                     }
-                }) {
+            }) {
                     Image(systemName: "line.horizontal.3")
                         .imageScale(.large)
                 }

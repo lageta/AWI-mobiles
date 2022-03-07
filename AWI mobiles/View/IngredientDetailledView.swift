@@ -9,13 +9,17 @@ import SwiftUI
 import Combine
 
 struct IngredientDetailledView: View {
+    
     @State var showingAlert : Bool = false
+    @State var bonusAlertIsVisible : Bool = false
     @State var ingredient : Ingredient
     @State var allergenes : [SelectedAllergenes]
     var intent : IngredientIntent = IngredientIntent()
     var viewModel : IngredientDetailViewModel
     var listViewModel : IngredientsViewModel
     private var addMode : Bool
+    
+
     
     init(ingredient : Ingredient, listViewModel : IngredientsViewModel, addMode : Bool = false){
         self.addMode = addMode
@@ -43,6 +47,8 @@ struct IngredientDetailledView: View {
             SelectedAllergenes(name:"Sésame", isSelected: ingredient.ALLERGENES.contains("Sésame")),
             SelectedAllergenes(name:"Oeuf", isSelected: ingredient.ALLERGENES.contains("Oeuf"))]
     }
+    
+   
     var body: some View {
         VStack {
             
@@ -121,14 +127,10 @@ struct IngredientDetailledView: View {
                     HStack {
                         Button(action: {
                             allergenes[index].isSelected = allergenes[index].isSelected ? false : true
-                            var allergenesToCommit : [String] = []
-                            allergenes.forEach{ allergene in
-                                if allergene.isSelected {
-                                    allergenesToCommit.append(allergene.name)
-                                }
-                                                }
+                            
+                                                
                             if !addMode {
-                            intent.intentToChange(allergenes: allergenesToCommit)
+                            intent.intentToChange(allergenes: getSelectedAllergenes())
                             intent.intentToUpdateList()
                             }
                         }) {
@@ -157,16 +159,37 @@ struct IngredientDetailledView: View {
             
         }
         .alert("Voulez vous créer cet ingredient ?", isPresented: $showingAlert){
-            Button("Ok"){}
-            
+            Button("Ok"){
+                intent.intentToCreateIngredient(ingredient: Ingredient(code: ingredient.CODE, libelle: ingredient.LIBELLE, categorie: ingredient.CATEGORIE, prix_unitaire: ingredient.PRIX_UNITAIRE, unite: ingredient.UNITE, stock: ingredient.STOCK, allergenes: getSelectedAllergenes(), id: "none"))
+                self.bonusAlertIsVisible = true }
+            Button("Cancel", role: .cancel){}
+                
                }
+        .alert("Ingrédient créé !",isPresented: $bonusAlertIsVisible) {
+            Button("Cancel", role: .cancel){}
+                   }
         .navigationTitle(addMode ? "Ajouter un ingredient" : self.ingredient.LIBELLE)
+        
+        
+
+    }
+    func getSelectedAllergenes() -> [String]{
+        var allergenesToCommit : [String] = []
+        self.allergenes.forEach{ allergene in
+            if allergene.isSelected {
+                allergenesToCommit.append(allergene.name)
+            }
+    }
+        return allergenesToCommit
+    }
     }
     
+ 
     
     
+
     
-}
+
 
 struct IngredientDetailledView_Previews: PreviewProvider {
     static var previews: some View {

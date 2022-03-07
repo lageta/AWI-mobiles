@@ -53,6 +53,7 @@ struct FloatingTextFieldIntegerView : View {
             .padding()
             .background(RoundedRectangle(cornerRadius: 10)
                             .stroke(Color.secondary))
+            .keyboardType(.decimalPad)
           
             Text(placeHolder ?? "")
                 .background(Color(UIColor.systemBackground))

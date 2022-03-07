@@ -11,12 +11,12 @@ import Combine
 enum CoutIntentState : Equatable{
     case useChargeChanging(Bool)
     case usePercChanging(Bool)
-    case coutProdPercChanging(Float)
-     case coutProdFixeChanging(Float)
-     case tauxPersChanging(Float)
-     case tauxForfChanging(Float)
-     case coefChargeChanging(Float)
-     case coefWithoutChargeChanging(Float)
+    case coutProdPercChanging(Double)
+     case coutProdFixeChanging(Double)
+     case tauxPersChanging(Double)
+     case tauxForfChanging(Double)
+     case coefChargeChanging(Double)
+     case coefWithoutChargeChanging(Double)
     
 }
 
@@ -36,22 +36,22 @@ struct CoutIntent {
     func intentToChange(usePerc : Bool){
         self.state.send(.usePercChanging(usePerc))
     }
-    func intentToChange(coutProdPerc : Float){
+    func intentToChange(coutProdPerc : Double){
         self.state.send(.coutProdPercChanging(coutProdPerc))
     }
-    func intentToChange(coutProdFixe : Float){
+    func intentToChange(coutProdFixe : Double){
         self.state.send(.coutProdFixeChanging(coutProdFixe))
     }
-    func intentToChange(tauxPers : Float){
+    func intentToChange(tauxPers : Double){
         self.state.send(.tauxPersChanging(tauxPers))
     }
-    func intentToChange(tauxForf : Float){
+    func intentToChange(tauxForf : Double){
         self.state.send(.tauxForfChanging(tauxForf))
     }
-    func intentToChange(coefCharge : Float){
+    func intentToChange(coefCharge : Double){
         self.state.send(.coefChargeChanging(coefCharge))
     }
-    func intentToChange(coefWithoutCharge : Float){
+    func intentToChange(coefWithoutCharge : Double){
         self.state.send(.coefWithoutChargeChanging(coefWithoutCharge))
     }
 }

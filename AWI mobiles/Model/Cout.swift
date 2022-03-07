@@ -10,12 +10,12 @@ import Foundation
 protocol CoutObserver {
     func changed (useCharge : Bool)
     func changed (usePerc :Bool)
-    func changed (coutProdPerc : Float)
-    func changed (coutProdFixe : Float)
-    func changed (tauxPers : Float)
-    func changed (tauxForf : Float)
-    func changed (coefCharge : Float)
-    func changed (coefWithoutCharge : Float)
+    func changed (coutProdPerc : Double)
+    func changed (coutProdFixe : Double)
+    func changed (tauxPers : Double)
+    func changed (tauxForf : Double)
+    func changed (coefCharge : Double)
+    func changed (coefWithoutCharge : Double)
 }
 
 class Cout : ObservableObject{
@@ -25,7 +25,7 @@ class Cout : ObservableObject{
     var useCharge : Bool
     var usePerc : Bool
     
-    var coutProdPerc : Float{
+    var coutProdPerc : Double{
         didSet{
             if !(self.coutProdPerc >= 0 && self.coutProdPerc <= 100) {
                 self.coutProdPerc = oldValue
@@ -36,37 +36,37 @@ class Cout : ObservableObject{
         }
     }
     
-    var coutProdFixe : Float {
+    var coutProdFixe : Double {
         didSet{
             self.observer?.changed(coutProdFixe: self.coutProdFixe)
         }
     }
     
-    var tauxPers : Float {
+    var tauxPers : Double {
         didSet{
             self.observer?.changed(tauxPers: self.tauxPers)
         }
     }
     
-    var tauxForf : Float {
+    var tauxForf : Double {
         didSet{
             self.observer?.changed(tauxForf: self.tauxForf)
         }
     }
     
-    var coefCharge : Float{
+    var coefCharge : Double{
         didSet{
             self.observer?.changed(coefCharge: self.coefCharge)
         }
     }
     
-    var coefWithoutCharge : Float{
+    var coefWithoutCharge : Double{
         didSet{
             self.observer?.changed(coefWithoutCharge: self.coefWithoutCharge)
         }
     }
     
-    init(useCharge : Bool,usePerc : Bool,coutProdPerc : Float,coutProdFixe : Float,tauxPers : Float,tauxForf : Float,coefCharge : Float, coefWithoutCharge : Float){
+    init(useCharge : Bool,usePerc : Bool,coutProdPerc : Double,coutProdFixe : Double,tauxPers : Double,tauxForf : Double,coefCharge : Double, coefWithoutCharge : Double){
         self.usePerc = usePerc
         self.useCharge = useCharge
         self.coutProdFixe = coutProdFixe

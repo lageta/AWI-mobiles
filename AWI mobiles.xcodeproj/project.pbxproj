@@ -24,6 +24,7 @@
 		6F7C805C27D4A9DA0047A0FF /* MultipleSelectionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7C805B27D4A9DA0047A0FF /* MultipleSelectionRow.swift */; };
 		6F7C805E27D4AAD90047A0FF /* AllergeneEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7C805D27D4AAD90047A0FF /* AllergeneEnum.swift */; };
 		6F7C806027D4ADD50047A0FF /* SelectedAllergenes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7C805F27D4ADD50047A0FF /* SelectedAllergenes.swift */; };
+		6F7C806427D537770047A0FF /* EtapeDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7C806327D537770047A0FF /* EtapeDetailsView.swift */; };
 		6FB4EEBC27BFB48800EB15E6 /* AWI_mobilesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4EEBB27BFB48800EB15E6 /* AWI_mobilesApp.swift */; };
 		6FB4EEBE27BFB48800EB15E6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4EEBD27BFB48800EB15E6 /* ContentView.swift */; };
 		6FB4EEC027BFB48900EB15E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FB4EEBF27BFB48900EB15E6 /* Assets.xcassets */; };
@@ -81,6 +82,7 @@
 		6F7C805B27D4A9DA0047A0FF /* MultipleSelectionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleSelectionRow.swift; sourceTree = "<group>"; };
 		6F7C805D27D4AAD90047A0FF /* AllergeneEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllergeneEnum.swift; sourceTree = "<group>"; };
 		6F7C805F27D4ADD50047A0FF /* SelectedAllergenes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedAllergenes.swift; sourceTree = "<group>"; };
+		6F7C806327D537770047A0FF /* EtapeDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EtapeDetailsView.swift; sourceTree = "<group>"; };
 		6FB4EEB827BFB48800EB15E6 /* AWI mobiles.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AWI mobiles.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FB4EEBB27BFB48800EB15E6 /* AWI_mobilesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWI_mobilesApp.swift; sourceTree = "<group>"; };
 		6FB4EEBD27BFB48800EB15E6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				6F31852927CF9AE400964AF3 /* CoutView.swift */,
 				6F7C804027CFB1740047A0FF /* FicheTechniqueListView.swift */,
 				6F7C805527D210130047A0FF /* FicheTechniqueDetailView.swift */,
+				6F7C806327D537770047A0FF /* EtapeDetailsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -408,6 +411,7 @@
 				6F7C804727CFBC080047A0FF /* coutViewModel.swift in Sources */,
 				6F7C804527CFBB070047A0FF /* CoutIntent.swift in Sources */,
 				6FB4EEBE27BFB48800EB15E6 /* ContentView.swift in Sources */,
+				6F7C806427D537770047A0FF /* EtapeDetailsView.swift in Sources */,
 				6FB4EEFA27BFCB5B00EB15E6 /* IngredientsViewModel.swift in Sources */,
 				6FB4EEF027BFBFBD00EB15E6 /* Allergene.swift in Sources */,
 				6FB4EEF227BFC06200EB15E6 /* Cout.swift in Sources */,

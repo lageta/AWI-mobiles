@@ -20,7 +20,7 @@ struct FloatingTextFieldFloatView : View {
     var rightIcon : String? = nil
     var placeHolder : String? = nil
     
-    @Binding var text : Float
+    @Binding var text : Double
     
     @State private var isEditing = false
     @State private var edges = EdgeInsets(top: 0, leading:45, bottom: 0, trailing: 0)
@@ -60,6 +60,7 @@ struct FloatingTextFieldFloatView : View {
             .padding()
             .background(RoundedRectangle(cornerRadius: 10)
                             .stroke(Color.secondary))
+            .keyboardType(.decimalPad)
           
             Text(placeHolder ?? "")
                 .background(Color(UIColor.systemBackground))

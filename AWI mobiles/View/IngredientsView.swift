@@ -156,14 +156,11 @@ struct IngredientsView: View {
                                          Spacer()
                                      }
                                      HStack {
-                                         if ingredient.ALLERGENES.isEmpty {
-                                             Text(ingredient.LIBELLE).foregroundColor(Color.secondary)
-                                             .font(.system(size : 14))
-                                         }
-                                         else {
+                                     
+                                         
                                              Text(ingredient.LIBELLE).foregroundColor(Color.secondary)
                                                  .font(.system(size : 14)).bold()
-                                         }
+                                         
                                          Spacer()
                                      }
                                  }
